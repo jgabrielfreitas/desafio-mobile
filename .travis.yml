@@ -2,15 +2,36 @@ language: android
 jdk: oraclejdk8
 env:
   global:
-    - ANDROID_TARGET=android-15
-    - ANDROID_ABI=armeabi-v7a
     - CODECOV_TOKEN="edacf0b6-0cf3-41ad-9143-65111b16002d"
 android:
   components:
+      - build-tools-26.0.2
+      - android-26
       - tools
       - platform-tools
       - tools
+before_install:
+  - chmod +x gradlew
+  # Install base Android SDK
+  - sudo apt-get update -qq
+  - if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch > /dev/null; fi
+  - wget http://dl.google.com/android/android-sdk_r22.0.5-linux.tgz
+  - tar xzf android-sdk_r22.0.5-linux.tgz
+  - export ANDROID_HOME=$PWD/android-sdk-linux
+  - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+  # install android build tools
+  - wget https://dl-ssl.google.com/android/repository/build-tools_r19.0.1-linux.zip
+  - unzip build-tools_r19.0.1-linux.zip -d $ANDROID_HOME
+  - mkdir -p $ANDROID_HOME/build-tools/
+  - mv $ANDROID_HOME/android-4.4.2 $ANDROID_HOME/build-tools/19.0.1
+  # Install required components.
+  - echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter android-19 --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
+install:
+  - true
 script:
-  - ./gradlew test
+  - TERM=dumb ./gradlew test assembleDebug
 after_success:
   - bash <(curl -s https://codecov.io/bash)
