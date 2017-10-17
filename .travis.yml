@@ -4,13 +4,11 @@ env:
   global:
     - ANDROID_TARGET=android-15
     - ANDROID_ABI=armeabi-v7a
-codecov:
-  token: edacf0b6-0cf3-41ad-9143-65111b16002d
 android:
   components:
   - tools
   - platform-tools
-  - build-tools-23.0.3
+  - build-tools-23.0.2
   - android-23
   - extra-android-m2repository
   - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
