@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/jgabrielfreitas/desafio-mobile/branch/master/graph/badge.svg)](https://codecov.io/gh/jgabrielfreitas/desafio-mobile)
+
 ![StoneSDK](https://cloud.githubusercontent.com/assets/2567823/11539067/6300c838-990c-11e5-9831-4f8ce691859e.png)
 
 # Desafio Mobile
