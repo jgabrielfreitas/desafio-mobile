@@ -8,6 +8,6 @@ android:
         - platform-tools
         - android-23
 script:
-    bash gradlew test jacocoTestReport
+    - bash gradlew test jacocoTestReport
 after_success:
     - bash <(curl -s https://codecov.io/bash)
