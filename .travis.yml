@@ -8,6 +8,6 @@ android:
         - platform-tools
         - android-23
 script:
-    - "./gradlew test jacocoTestReport"
+    - "./gradlew test --stacktrace"
 after_success:
     - "<(curl -s https://codecov.io/bash)"
