@@ -1,13 +1,20 @@
 language: android
 jdk:
-    - oraclejdk7
+    - oraclejdk8
 android:
     components:
         - tools
         - build-tools-23.0.1
         - platform-tools
         - android-23
+before_install:
+    - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+    - chmod +x gradle/wrapper/gradle-wrapper.jar
+    - chmod +x ./gradlew
+    - git add -f gradle/wrapper/gradle-wrapper.jar
 script:
-    - "./gradlew test --stacktrace"
+    - java -version
+    - ./gradlew -version
+    - ./gradlew test --stacktrace
 after_success:
     - "<(curl -s https://codecov.io/bash)"
